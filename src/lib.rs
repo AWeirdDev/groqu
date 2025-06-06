@@ -1,4 +1,4 @@
-mod models;
+pub mod models;
 
 use anyhow::Result;
 use reqwest::{ Client, header::{ HeaderMap, HeaderValue } };
