@@ -3,6 +3,7 @@ name = "groqu"
 description = "Groq API wrapper. One of the worst lmfao"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
 
 [dependencies]
 anyhow = "1.0.98"
