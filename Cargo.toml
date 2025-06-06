@@ -1,7 +1,7 @@
 [package]
 name = "groqu"
 description = "Groq API wrapper. One of the worst lmfao"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 license = "MIT"
 
