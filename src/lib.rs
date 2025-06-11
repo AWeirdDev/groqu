@@ -5,22 +5,24 @@ use reqwest::{ Client, header::{ HeaderMap, HeaderValue } };
 
 use crate::models::{ ChatCompletionRequest, ChatCompletionResponse };
 
-#[derive(Debug, Default, Clone)]
+/// Represents the Groq client.
+#[derive(Debug, Clone)]
 pub struct Groq {
     client: Client,
 }
 
 impl Groq {
-    pub fn new(token: String) -> Self {
+    pub fn new<K: AsRef<str>>(token: K) -> Self {
         let mut headers = HeaderMap::new();
         headers.append(
             "Authorization",
-            HeaderValue::from_str(&format!("Bearer {}", token)).unwrap()
+            HeaderValue::from_str(&format!("Bearer {}", token.as_ref())).unwrap()
         );
 
         Self { client: Client::builder().default_headers(headers).build().unwrap() }
     }
 
+    /// Creates chat completion.
     pub async fn create_chat_completion(
         &self,
         request: ChatCompletionRequest
