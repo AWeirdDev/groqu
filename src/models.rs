@@ -6,7 +6,7 @@ use ijson::{ ijson, IValue };
 use serde::{ Deserialize, Serialize };
 use base64::{ engine::general_purpose, Engine as _ };
 
-#[derive(Debug, Default, Serialize)]
+#[derive(Debug, Clone, Default, Serialize)]
 pub struct ChatCompletionRequest {
     /// ID of the model to use
     pub model: IValue,
@@ -143,7 +143,7 @@ impl _ChatCompletionRequestBuilder<'_> {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ChatMessage {
     /// The role of the message author
     pub role: ChatRole,
@@ -168,7 +168,7 @@ impl ChatMessage {
     messagerole!(user, ChatRole::User);
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ContentType {
     /// Text content type.
@@ -200,7 +200,7 @@ impl<K: ToString> From<K> for ContentType {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ContentPart {
     /// A text content part.
     Text {
@@ -237,7 +237,7 @@ impl ContentPart {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ImageUrl {
     pub url: String,
 }
@@ -254,7 +254,7 @@ impl ImageUrl {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum ChatRole {
     System,
@@ -262,26 +262,26 @@ pub enum ChatRole {
     User,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 #[serde(untagged)]
 pub enum StopSequence {
     Single(String),
     Multiple(Vec<String>),
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 pub struct ResponseFormat {
     /// The type of response format
     pub r#type: String,
 }
 
-#[derive(Debug, Deserialize, Default)]
+#[derive(Debug, Clone, Deserialize, Default)]
 pub struct ChatCompletionResponse {
     /// The list of completion choices
     pub choices: Option<Vec<ChatCompletionChoice>>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct ChatCompletionChoice {
     /// The index of this completion choice
     pub index: usize,
