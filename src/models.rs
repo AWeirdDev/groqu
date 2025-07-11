@@ -252,6 +252,7 @@ impl<T: Into<ContentPart>> From<(T, T)> for ContentType {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
 pub enum ContentPart {
     /// A text content part.
     /// This can be paired with a `ContentPart::Image`.
